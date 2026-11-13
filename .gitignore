@@ -1,0 +1,18 @@
+# Dependencies and build output
+node_modules/
+dist/
+build/
+coverage/
+
+# Local deployment and environment files
+.vercel/
+.env
+.env.*
+!.env.example
+
+# Logs and OS/editor files
+*.log
+npm-debug.log*
+.DS_Store
+.idea/
+.vscode/

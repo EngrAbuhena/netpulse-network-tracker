@@ -1,16 +1,20 @@
 import { randomBytes } from 'node:crypto';
-import type { ApiRequest, ApiResponse } from '../../server/apiHelpers';
-import { methodNotAllowed, queryValue, setNoStore } from '../../server/apiHelpers';
+import type { IncomingMessage, ServerResponse } from 'node:http';
 
 const MAX_BYTES = 1024 * 1024;
 
-export default function handler(req: ApiRequest, res: ApiResponse): void {
-  setNoStore(res);
+export default function handler(req: IncomingMessage, res: ServerResponse): void {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
   if (req.method !== 'GET') {
-    methodNotAllowed(res, 'GET');
+    res.setHeader('Allow', 'GET');
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.statusCode = 405;
+    res.end(JSON.stringify({ error: 'Method not allowed' }));
     return;
   }
-  const rawBytes = queryValue(req, 'bytes') || String(MAX_BYTES);
+  const url = new URL(req.url || '/', 'https://netpulse.invalid');
+  const rawBytes = url.searchParams.get('bytes') || String(MAX_BYTES);
   const parsedBytes = Number(rawBytes);
   if (!Number.isInteger(parsedBytes) || parsedBytes < 1024 || parsedBytes > MAX_BYTES) {
     res.statusCode = 400;

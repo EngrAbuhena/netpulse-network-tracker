@@ -5,7 +5,6 @@ import pingHandler from '../api/ping';
 import myIpHandler from '../api/my-ip';
 import downloadHandler from '../api/speedtest/download';
 import uploadHandler from '../api/speedtest/upload';
-import { allowRequest } from '../server/apiHelpers';
 
 class MockResponse extends EventEmitter {
   statusCode = 200;
@@ -65,9 +64,16 @@ describe('Vercel API function handlers', () => {
   });
 
   it('enforces the per-instance upload rate guard', () => {
-    const uniqueKey = `test-${Date.now()}`;
-    for (let i = 0; i < 3; i++) expect(allowRequest(uniqueKey, 3, 60_000)).toBe(true);
-    expect(allowRequest(uniqueKey, 3, 60_000)).toBe(false);
+    const ip = '198.51.100.91';
+    let lastResponse: MockResponse | undefined;
+    for (let i = 0; i < 31; i++) {
+      const req = makeRequest('POST', '/api/speedtest/upload', { 'x-real-ip': ip, 'content-length': '0' });
+      const res = new MockResponse();
+      uploadHandler(req as IncomingMessage, res as never);
+      if (res.statusCode !== 429) req.emit('end');
+      lastResponse = res;
+    }
+    expect(lastResponse?.statusCode).toBe(429);
   });
 
   it('counts and discards upload bytes, and rejects oversized upload requests', () => {

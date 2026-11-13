@@ -1,21 +1,57 @@
-import type { ApiRequest, ApiResponse } from '../../server/apiHelpers';
-import { allowRequest, clientIp, methodNotAllowed, setNoStore } from '../../server/apiHelpers';
+import { isIP } from 'node:net';
+import type { IncomingMessage, ServerResponse } from 'node:http';
 
+type Request = IncomingMessage & { headers: IncomingMessage['headers'] };
 const MAX_BYTES = 256 * 1024;
 const REQUESTS_PER_MINUTE = 30;
+const windows = new Map<string, { start: number; count: number }>();
 
 export const config = { api: { bodyParser: false } };
 
-export default function handler(req: ApiRequest, res: ApiResponse): void {
-  setNoStore(res);
+function getClientIp(req: Request): string | null {
+  const candidates = [
+    req.headers['x-real-ip'],
+    typeof req.headers['x-forwarded-for'] === 'string' ? req.headers['x-forwarded-for'].split(',')[0] : undefined,
+    req.socket.remoteAddress,
+  ];
+  for (const candidate of candidates) {
+    if (typeof candidate !== 'string') continue;
+    const normalized = candidate.trim().replace(/^::ffff:/i, '');
+    if (isIP(normalized)) return normalized;
+  }
+  return null;
+}
+
+function isAllowed(key: string): boolean {
+  const now = Date.now();
+  const current = windows.get(key);
+  if (!current || now - current.start >= 60_000) {
+    windows.set(key, { start: now, count: 1 });
+    if (windows.size > 2000) {
+      for (const [entryKey, entry] of windows) {
+        if (now - entry.start >= 60_000) windows.delete(entryKey);
+      }
+    }
+    return true;
+  }
+  if (current.count >= REQUESTS_PER_MINUTE) return false;
+  current.count++;
+  return true;
+}
+
+export default function handler(req: Request, res: ServerResponse): void {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   if (req.method !== 'POST') {
-    methodNotAllowed(res, 'POST');
+    res.setHeader('Allow', 'POST');
+    res.statusCode = 405;
+    res.end(JSON.stringify({ error: 'Method not allowed' }));
     return;
   }
 
-  const ip = clientIp(req) || 'unknown';
-  if (!allowRequest(ip, REQUESTS_PER_MINUTE, 60_000)) {
+  const clientIp = getClientIp(req) || 'unknown';
+  if (!isAllowed(clientIp)) {
     res.setHeader('Retry-After', '60');
     res.statusCode = 429;
     res.end(JSON.stringify({ error: 'Upload test rate limit reached; retry in one minute.' }));

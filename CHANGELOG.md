@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1 — 2026-11-13
+
+- Fixed Vercel function cold-start failures by removing extensionless local imports from API routes; every endpoint is now self-contained apart from Node built-ins.
+- Retained API request validation, no-store headers, upload size cap, and per-instance rate guard.
+
 ## 1.0.0 — 2026-11-13
 
 - Promoted the project from `1.0.0-beta.1` to the Vercel-ready `v1.0.0` release.

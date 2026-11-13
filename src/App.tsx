@@ -246,7 +246,7 @@ export default function App() {
               Net<span className="text-teal-400">Pulse</span>
             </span>
             <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-semibold border border-slate-700">
-              v1.0.0
+              v1.0.1
             </span>
           </div>
 

@@ -1,6 +1,6 @@
 # NetPulse — Network Diagnostics Web App
 
-**Release line:** 1.0.0 (beta work began at `1.0.0-beta.1`)  
+**Release:** 1.0.1 (patch to the original v1.0.0 release; beta work began at `1.0.0-beta.1`)  
 **Platform:** Responsive browser app, deployable to Vercel. The Android-style frame and system controls are UI previews, not native Android controls.
 
 NetPulse reports the public IP observed by its own server, attempts a best-effort local IPv4 candidate lookup where the browser allows it, calculates IPv4 subnets, and measures HTTP latency and transfer throughput to the deployed app endpoints.
@@ -52,4 +52,4 @@ For local development, equivalent routes are served by the Vite plugin in `vite.
 
 ## Release
 
-See [CHANGELOG.md](CHANGELOG.md). The beta work is finalized as **v1.0.0** after the checks above pass.
+See [CHANGELOG.md](CHANGELOG.md). Current patch release: **v1.0.1**.

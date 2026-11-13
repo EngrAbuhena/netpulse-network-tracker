@@ -185,7 +185,7 @@ export default function App() {
   };
 
   return (
-    <div className="app-shell min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-0 md:p-6 font-sans">
+    <div className="app-shell h-[100dvh] min-h-0 overflow-hidden bg-slate-950 text-slate-100 flex flex-col items-center justify-start p-0 md:h-auto md:min-h-screen md:justify-center md:overflow-visible md:p-6 font-sans">
       {/* Top Desktop Controls Bar (for device frame switch & quick status) */}
       <header className="hidden md:flex items-center justify-between w-full max-w-4xl px-4 py-2.5 mb-3 bg-slate-900/80 border border-slate-800 rounded-2xl backdrop-blur-md">
         <div className="flex items-center gap-3">

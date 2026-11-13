@@ -45,7 +45,7 @@ export const IpTrackerTab: React.FC<IpTrackerTabProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-4 p-4 pb-24 overflow-y-auto max-w-xl mx-auto">
+    <div className="flex flex-col gap-4 p-3 sm:p-4 pb-6 max-w-xl mx-auto w-full">
       <p className="rounded-xl border border-slate-800 bg-slate-900/70 px-3 py-2 text-[11px] leading-relaxed text-slate-400">
         Public IP is read by this app’s server; the hosting provider necessarily sees your request IP. No third-party geolocation provider is contacted. Browsers may hide local IP details.
       </p>

@@ -140,7 +140,7 @@ HTTP latency: ${speedRecords[0] ? `${speedRecords[0].pingMs} ms` : 'N/A'} (Jitte
   };
 
   return (
-    <div className="flex flex-col gap-4 p-4 pb-24 overflow-y-auto max-w-xl mx-auto">
+    <div className="flex flex-col gap-4 p-3 sm:p-4 pb-6 max-w-xl mx-auto w-full">
       {/* 1. Host Ping & Latency Utility */}
       <div className="rounded-3xl bg-slate-900 border border-slate-800 p-5 shadow-lg">
         <div className="flex items-center justify-between mb-3">

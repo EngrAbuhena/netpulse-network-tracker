@@ -78,7 +78,7 @@ export const MacTrackerTab: React.FC<MacTrackerTabProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-4 p-4 pb-24 overflow-y-auto max-w-xl mx-auto">
+    <div className="flex flex-col gap-4 p-3 sm:p-4 pb-6 max-w-xl mx-auto w-full">
       <p className="rounded-xl border border-amber-800/60 bg-amber-950/40 px-3 py-2 text-[11px] leading-relaxed text-amber-200">This is a sample interface profile. Browsers cannot read or change the Android device’s MAC address. Generated addresses are examples only.</p>
       {/* 1. Android Wi-Fi MAC & Privacy Control Hero Card */}
       <div className="rounded-3xl bg-slate-900 border border-slate-800 p-5 shadow-lg">

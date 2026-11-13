@@ -185,7 +185,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-0 md:p-6 font-sans">
+    <div className="app-shell min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-0 md:p-6 font-sans">
       {/* Top Desktop Controls Bar (for device frame switch & quick status) */}
       <header className="hidden md:flex items-center justify-between w-full max-w-4xl px-4 py-2.5 mb-3 bg-slate-900/80 border border-slate-800 rounded-2xl backdrop-blur-md">
         <div className="flex items-center gap-3">
@@ -220,8 +220,8 @@ export default function App() {
       <div
         className={`w-full transition-all duration-300 flex flex-col ${
           isPhoneFrame
-            ? 'max-w-[420px] h-[100dvh] md:h-[860px] md:rounded-[50px] md:border-[10px] md:border-slate-800 md:shadow-2xl md:ring-1 md:ring-slate-700/60 overflow-hidden relative bg-slate-950'
-            : 'max-w-4xl min-h-[90vh] rounded-3xl border border-slate-800 bg-slate-950 shadow-2xl overflow-hidden relative'
+            ? 'max-w-[420px] h-[calc(100dvh-env(safe-area-inset-top,0px))] md:h-[860px] md:rounded-[50px] md:border-[10px] md:border-slate-800 md:shadow-2xl md:ring-1 md:ring-slate-700/60 overflow-hidden relative bg-slate-950'
+            : 'max-w-4xl h-[calc(100dvh-env(safe-area-inset-top,0px))] md:h-auto md:min-h-[90vh] rounded-none md:rounded-3xl border-0 md:border border-slate-800 bg-slate-950 md:shadow-2xl overflow-hidden relative'
         }`}
       >
         {/* Android Speaker Grill (Mockup Bezel Detail) */}
@@ -231,13 +231,15 @@ export default function App() {
           </div>
         )}
 
-        {/* Android Status Bar */}
-        <AndroidStatusBar
-          connection={connection}
-          isVpnActive={isVpnActive}
-          onOpenQuickSettings={() => setIsQuickSettingsOpen(true)}
-          networkType={networkType}
-        />
+        {/* Android status bar is a desktop device-frame preview; real phones already show the OS bar. */}
+        <div className="hidden md:block">
+          <AndroidStatusBar
+            connection={connection}
+            isVpnActive={isVpnActive}
+            onOpenQuickSettings={() => setIsQuickSettingsOpen(true)}
+            networkType={networkType}
+          />
+        </div>
 
         {/* Android In-App Header Bar */}
         <div className="flex items-center justify-between px-5 py-2.5 bg-slate-950/90 border-b border-slate-850 z-20">
@@ -274,7 +276,7 @@ export default function App() {
         </div>
 
         {/* Tab View Content Area */}
-        <main className="flex-1 overflow-y-auto relative bg-slate-950">
+        <main className="min-h-0 flex-1 overflow-y-auto overscroll-contain relative bg-slate-950">
           {activeTab === 'dashboard' && (
             <DashboardTab
               publicIp={publicIp}

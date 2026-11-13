@@ -23,7 +23,7 @@ export const AndroidNavBar: React.FC<AndroidNavBarProps> = ({
   ] as const;
 
   return (
-    <nav className="relative z-30 shrink-0 bg-slate-900/90 backdrop-blur-md border-t border-slate-800/80 px-2 pt-1 pb-2">
+    <nav className="relative z-30 shrink-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800/80 px-1.5 pt-1 pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))]">
       <div className="grid grid-cols-5 items-center max-w-lg mx-auto">
         {tabs.map((tab) => {
           const Icon = tab.icon;
@@ -45,7 +45,7 @@ export const AndroidNavBar: React.FC<AndroidNavBarProps> = ({
                 <Icon className={`w-5 h-5 transition-transform ${isActive ? 'scale-105 stroke-[2.2]' : 'stroke-[1.8]'}`} />
               </div>
               <span
-                className={`text-[11px] font-medium tracking-tight mt-0.5 transition-colors ${
+                className={`text-[10px] sm:text-[11px] font-medium tracking-tight mt-0.5 transition-colors ${
                   isActive ? 'text-teal-400 font-semibold' : 'text-slate-400'
                 }`}
               >
@@ -57,7 +57,7 @@ export const AndroidNavBar: React.FC<AndroidNavBarProps> = ({
       </div>
 
       {/* Android System Gesture Navigation Handle Pill */}
-      <div className="flex justify-center pt-1.5 pb-0.5">
+      <div className="hidden md:flex justify-center pt-1.5 pb-0.5">
         <div className="w-28 h-1 rounded-full bg-slate-600/50 hover:bg-slate-400/60 transition-colors" />
       </div>
     </nav>

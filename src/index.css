@@ -7,10 +7,21 @@
     --font-mono: 'JetBrains Mono', monospace;
   }
 
+  html, body, #root {
+    min-height: 100%;
+  }
+
   body {
+    margin: 0;
     font-family: var(--font-sans);
     -webkit-tap-highlight-color: transparent;
     user-select: none;
+  }
+
+  .app-shell {
+    min-height: 100svh;
+    min-height: 100dvh;
+    padding-top: env(safe-area-inset-top, 0px);
   }
 
   input, textarea, [contenteditable="true"] {

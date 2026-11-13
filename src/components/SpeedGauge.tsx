@@ -109,7 +109,7 @@ export const SpeedGauge: React.FC<SpeedGaugeProps> = ({
   return (
     <div className="flex flex-col items-center justify-center relative select-none">
       {/* SVG Speedometer */}
-      <div className="relative w-72 h-64 flex items-center justify-center">
+      <div className="relative w-full max-w-72 aspect-[9/8] flex items-center justify-center">
         <svg viewBox="0 0 270 240" className="w-full h-full drop-shadow-md">
           <defs>
             <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">

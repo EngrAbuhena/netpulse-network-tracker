@@ -187,7 +187,7 @@ export const SpeedTestTab: React.FC<SpeedTestTabProps> = ({
       : metrics.downloadMbps || metrics.uploadMbps || 0;
 
   return (
-    <div className="flex flex-col gap-4 p-4 pb-24 overflow-y-auto max-w-xl mx-auto">
+    <div className="flex flex-col gap-4 p-3 sm:p-4 pb-6 max-w-xl mx-auto w-full">
       <p className="rounded-xl border border-slate-800 bg-slate-900/70 px-3 py-2 text-[11px] leading-relaxed text-slate-400">
         Measurements use this app’s HTTP endpoints (not ICMP). A run transfers at most 24 MB down and 5 MB up; your IP is visible to the hosting provider.
       </p>
@@ -217,7 +217,7 @@ export const SpeedTestTab: React.FC<SpeedTestTabProps> = ({
       </div>
 
       {/* Main Speedometer Gauge Card */}
-      <div className="rounded-3xl bg-slate-900 border border-slate-800 p-5 shadow-lg flex flex-col items-center">
+      <div className="rounded-3xl bg-slate-900 border border-slate-800 p-3 sm:p-5 shadow-lg flex flex-col items-center">
         <SpeedGauge
           speedMbps={currentDisplaySpeed}
           stage={metrics.stage}
@@ -253,7 +253,7 @@ export const SpeedTestTab: React.FC<SpeedTestTabProps> = ({
       </div>
 
       {/* 4 Telemetry Metrics Grid */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 min-[390px]:grid-cols-2 gap-3">
         {/* Download Card */}
         <div className="rounded-2xl bg-slate-900/90 border border-slate-800 p-3.5 flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-teal-500/15 text-teal-400 border border-teal-500/30">

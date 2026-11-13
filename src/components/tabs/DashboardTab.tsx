@@ -59,7 +59,7 @@ export const DashboardTab: React.FC<DashboardTabProps> = ({
   const primaryInterface = interfaces.find((i) => i.name === (networkType === 'wifi' ? 'wlan0' : 'rmnet_data0')) || interfaces[0];
 
   return (
-    <div className="flex flex-col gap-4 p-4 pb-24 overflow-y-auto max-w-xl mx-auto">
+    <div className="flex flex-col gap-4 p-3 sm:p-4 pb-6 max-w-xl mx-auto w-full">
       {/* 1. Primary Network Connection Hero Card */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 border border-slate-800 p-5 shadow-lg">
         {/* Ambient background glow */}

@@ -1,7 +1,7 @@
 {
   "name": "NetPulse — Network Diagnostics",
   "description": "Browser-based public IP and HTTP network diagnostics. Android-style system controls and adapter cards are sample UI only.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }

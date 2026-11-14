@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.2 — 2026-11-13
+
+- Redesigned the app shell for mobile-first responsive use: removed vertical centering gaps, sized the shell to the dynamic viewport, and kept the bottom navigation visible while tab content scrolls.
+- Added mobile safe-area handling, removed the simulated Android status/gesture bars on phones, and tightened narrow-screen speed-test layout.
+- Kept browser zoom enabled and improved small-screen gauge/metrics sizing.
+
+
 ## 1.0.1 — 2026-11-13
 
 - Fixed Vercel function cold-start failures by removing extensionless local imports from API routes; every endpoint is now self-contained apart from Node built-ins.

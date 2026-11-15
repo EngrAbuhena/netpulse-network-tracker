@@ -1,0 +1,16 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'app.netpulse.android'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'app.netpulse.android'
+        minSdk 23
+        targetSdk 34
+        versionCode 102
+        versionName '1.0.2'
+    }
+}

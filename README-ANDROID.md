@@ -10,7 +10,9 @@ This is a lightweight Android WebView wrapper around the live NetPulse website a
 4. When the run succeeds, open it and download the `NetPulse-Android-debug-APK` artifact.
 5. Extract the artifact ZIP on your phone, open `app-debug.apk`, and allow installation from that source if Android asks.
 
-The debug APK is for personal sideloading, not Google Play distribution. It is signed with a debug key and is not a Play Store release.
+The debug APK is for personal sideloading, not Google Play distribution. It is signed with a debug key and is not a Play Store release. A new GitHub Actions build may have a different temporary debug signing key; uninstall the previously installed debug APK before installing a newly built one.
+
+If the app opens to a blank screen, first update **Android System WebView** and **Chrome** in Google Play, make sure the phone is online, and reopen NetPulse. The wrapper displays an error panel with retry/open-in-browser options if the hosted page still fails to load.
 
 ## Build requirements for local Android Studio use
 
